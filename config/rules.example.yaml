@@ -1,0 +1,16 @@
+rules:
+  - id: suspicious_shell
+    description: Suspicious shell execution
+    event_types: ["exec"]
+    comm_regex: "(?i)(bash|sh|zsh|ksh|dash)"
+
+  - id: crypto_miner_exec
+    description: Executable name looks like a crypto miner
+    event_types: ["exec"]
+    filename_regex: "(?i)(xmrig|minerd|cryptominer)"
+
+  - id: crypto_miner_port
+    description: Outgoing connection to common mining pool ports (rough heuristic)
+    event_types: ["connect"]
+    min_dest_port: 3333
+    max_dest_port: 5555
